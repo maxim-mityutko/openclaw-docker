@@ -1,7 +1,7 @@
 ARG OPENCLAW_IMAGE_VERSION=latest
-ARG RBW_VERSION=1.15.0
-
 FROM ghcr.io/openclaw/openclaw:${OPENCLAW_IMAGE_VERSION}
+
+ARG RBW_VERSION=1.15.0
 
 USER root
 
@@ -12,7 +12,7 @@ RUN apt-get update \
         curl \
         jq
 
-RUN echo "Installing 'rbw' Bitwarden unnoficial clientt..."
+RUN echo "Installing 'rbw' Bitwarden unofficial client..."
 RUN curl -fsSL \
       "https://github.com/doy/rbw/releases/download/${RBW_VERSION}/rbw_${RBW_VERSION}_linux_amd64.tar.gz" \
       -o /tmp/rbw.tar.gz; \
