@@ -30,6 +30,9 @@ jobs:
       contents: write
       packages: write
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3.0.0
@@ -49,7 +52,8 @@ jobs:
         if: ${{ env.OPENCLAW_IMAGE_VERSION == 'latest' }}
         id: openclaw-version
         run: |
-          LATEST_VERSION=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -s https://api.github.com/orgs/openclaw/packages/container/openclaw/versions | jq -r '[.[] | .metadata.container.tags[]? | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))] | unique | sort_by(split(".") | map(tonumber)) | last' )
+          LATEST_VERSION=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -s https://api.github.com/orgs/openclaw/packages/container/openclaw/versions?per_page=100 | jq -r '[.[] | .metadata.container.tags[]? | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))] | unique | sort_by(split(".") | map(tonumber)) | last' )
+          echo "Resolved OpenClaw image version: $LATEST_VERSION"
           echo "OPENCLAW_IMAGE_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
 
       # https://github.com/marketplace/actions/docker-metadata-action
@@ -82,12 +86,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
-          platforms: linux/amd64, linux/arm64
+          platforms: linux/amd64
           annotations: ${{ steps.meta.outputs.annotations }}
-          build-args: OPENCLAW_IMAGE_VERSION=${{ env.OPENCLAW_IMAGE_VERSION }}
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
+          build-args: |
+            OPENCLAW_IMAGE_VERSION=${{ env.OPENCLAW_IMAGE_VERSION }}
 
       - name: Update README Badge
         if: ${{ success() && github.ref_type != 'tag' }}
