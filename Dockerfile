@@ -18,7 +18,9 @@ RUN curl -fsSL \
       -o /tmp/rbw.tar.gz; \
     tar -xzf /tmp/rbw.tar.gz -C /tmp; \
     install -m 0755 /tmp/rbw /usr/local/bin/rbw; \
-    rbw --version
+    install -m 0755 /tmp/rbw /usr/local/bin/rbw-agent; \
+    rbw --version; \
+    rbw-agent --version
 
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
