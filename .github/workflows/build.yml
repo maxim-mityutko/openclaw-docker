@@ -21,7 +21,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  OPENCLAW_IMAGE_VERSION: ${{ github.event.inputs['openclaw-image-version'] || 'latest' }}
+  OPENCLAW_IMAGE_VERSION: ${{ github.event.inputs.openclaw-image-version || 'latest' }}
 
 jobs:
   build:
