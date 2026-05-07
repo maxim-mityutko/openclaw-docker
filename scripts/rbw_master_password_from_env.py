@@ -3,7 +3,7 @@
 
 rbw-agent speaks the Assuan pinentry protocol to request the master password.
 This script answers the small command subset rbw needs and returns the value
-from RBW_MASTER_PASSWORD instead of prompting interactively.
+from VAULT_MASTER_PASSWORD instead of prompting interactively.
 
 Usage: 
     rbw config set pinentry /path/to/rbw_master_password_from_env.py
@@ -12,7 +12,7 @@ Usage:
 import os
 import sys
 
-RBW_MASTER_PASSWORD_ENV = "RBW_MASTER_PASSWORD"
+VAULT_MASTER_PASSWORD_ENV = "VAULT_MASTER_PASSWORD"
 
 def assuan_escape(value: str) -> str:
     # Assuan data line escaping: escape %, CR, LF.
@@ -23,9 +23,9 @@ def assuan_escape(value: str) -> str:
         .replace("\n", "%0A")
     )
 
-password = os.environ.get(RBW_MASTER_PASSWORD_ENV)
+password = os.environ.get(VAULT_MASTER_PASSWORD_ENV)
 if password is None:
-    print(f"ERR 83886179 {RBW_MASTER_PASSWORD_ENV} is not set", flush=True)
+    print(f"ERR 83886179 {VAULT_MASTER_PASSWORD_ENV} is not set", flush=True)
     sys.exit(1)
 
 print("OK Pleased to meet you", flush=True)
