@@ -12,7 +12,7 @@ RUN apt-get update \
         curl \
         jq
 
-RUN echo "Installing 'rbw' Bitwarden unofficial client..."
+RUN echo "Installing 'RBW' - Bitwarden unofficial client..."
 RUN curl -fsSL \
       "https://github.com/doy/rbw/releases/download/${RBW_VERSION}/rbw_${RBW_VERSION}_linux_amd64.tar.gz" \
       -o /tmp/rbw.tar.gz; \
