@@ -18,7 +18,7 @@ RUN curl -fsSL \
       -o /tmp/rbw.tar.gz; \
     tar -xzf /tmp/rbw.tar.gz -C /tmp; \
     install -m 0755 /tmp/rbw /usr/local/bin/rbw; \
-    install -m 0755 /tmp/rbw /usr/local/bin/rbw-agent; \
+    install -m 0755 /tmp/rbw-agent /usr/local/bin/rbw-agent; \
     rbw --version; \
     rbw-agent --version
 
