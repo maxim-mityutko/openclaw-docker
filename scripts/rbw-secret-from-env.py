@@ -2,7 +2,7 @@
 import os
 import sys
 
-PASSWORD_FILE = os.environ.get("RBW_MASTER_PASSWORD_FILE", "/home/node/.openclaw/workspace/skills/rbw_master_password")
+RBW_MASTER_PASSWORD_ENV = "RBW_MASTER_PASSWORD"
 
 def assuan_escape(value: str) -> str:
     # Assuan data line escaping: escape %, CR, LF.
@@ -13,11 +13,9 @@ def assuan_escape(value: str) -> str:
         .replace("\n", "%0A")
     )
 
-try:
-    with open(PASSWORD_FILE, "r", encoding="utf-8") as f:
-        password = f.read().rstrip("\n")
-except Exception as e:
-    print(f"ERR 83886179 failed to read password: {e}", flush=True)
+password = os.environ.get(RBW_MASTER_PASSWORD_ENV)
+if password is None:
+    print(f"ERR 83886179 {RBW_MASTER_PASSWORD_ENV} is not set", flush=True)
     sys.exit(1)
 
 print("OK Pleased to meet you", flush=True)
@@ -46,4 +44,3 @@ for line in sys.stdin:
         print("OK", flush=True)
     else:
         print("OK", flush=True)
-PY
