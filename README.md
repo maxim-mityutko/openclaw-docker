@@ -34,3 +34,25 @@ rbw config set pinentry /usr/local/bin/rbw_master_password_from_env.py
 rbw login
 rbw unlock
 ```
+
+`rbw` writes its configuration to `~/.config/rbw/config.json`. If the container
+cannot create or update that file, mount a prepared config file at that path
+instead:
+
+```json
+{
+  "email": "john@doe.com",
+  "sso_id": null,
+  "base_url": "https://vault.doe.com",
+  "identity_url": null,
+  "ui_url": null,
+  "notifications_url": null,
+  "lock_timeout": 3600,
+  "sync_interval": 300,
+  "pinentry": "/usr/local/bin/rbw_master_password_from_env.py",
+  "client_cert_path": null
+}
+```
+
+Refer to the [RBW configuration docs](https://github.com/doy/rbw/blob/main/README.md#configuration)
+for the details about supported options.
