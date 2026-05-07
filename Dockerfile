@@ -15,7 +15,7 @@ RUN apt-get update \
         jq 
 
 RUN echo "Cheaky 'pinentry' replacement, make sure that VAULT_MASTER_PASSWORD environment variable is set during execution..."
-RUN install -m 0700 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
+RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
 
 RUN echo "Installing 'RBW' - Bitwarden unofficial client..."
 RUN curl -fsSL \
