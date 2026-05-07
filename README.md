@@ -4,9 +4,15 @@
 ## Why
 
 ## Secrets Management
-- using VaultWarden to manage secrets for all services instead of providing them via environment variables
-- simplifies secrets management, as only VaultWarden master password will be provided to container
-- for security purposes create a dedicated account for OpenClaw in VaultWarden and only provide secrets scoped for the bot
+
+OpenClaw should retrieve service credentials from Vaultwarden instead of
+receiving each secret as a separate container environment variable.
+
+The container only needs the Vaultwarden master password, exposed as
+`RBW_MASTER_PASSWORD`, so `rbw` can unlock the vault at runtime and fetch the
+specific credentials OpenClaw needs. For better isolation, create a dedicated
+Vaultwarden account for OpenClaw and share only the items that are required by
+the bot.
 
 ### RBW
 
@@ -18,7 +24,7 @@ without relying on a browser or desktop integration.
 container, interactive pinentry prompts are awkward and often unavailable, so
 the pinentry command should be replaced with
 `/usr/local/bin/rbw_master_password_from_env.py`. The script emulates the small
-pinentry protocol surface that `rbw-agent` needs and returns master password from
+pinentry protocol surface that `rbw-agent` needs and returns the master password
 from the `RBW_MASTER_PASSWORD` environment variable instead.
 
 ```sh
