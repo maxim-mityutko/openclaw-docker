@@ -9,7 +9,7 @@ OpenClaw should retrieve service credentials from Vaultwarden instead of
 receiving each secret as a separate container environment variable.
 
 The container only needs the Vaultwarden master password, exposed as
-`VAULT_MASTER_PASSWORD`, so `rbw` can unlock the vault at runtime and fetch the
+`BITWARDEN_MASTER_PASSWORD`, so `rbw` can unlock the vault at runtime and fetch the
 specific credentials OpenClaw needs. For better isolation, create a dedicated
 Vaultwarden account for OpenClaw and share only the items that are required by
 the bot.
@@ -25,7 +25,7 @@ container, interactive pinentry prompts are awkward and often unavailable, so
 the pinentry command should be replaced with
 `/usr/local/bin/rbw_master_password_from_env.py`. The script emulates the small
 pinentry protocol surface that `rbw-agent` needs and returns the master password
-from the `VAULT_MASTER_PASSWORD` environment variable instead.
+from the `BITWARDEN_MASTER_PASSWORD` environment variable instead.
 
 ```sh
 rbw config set email john@doe.com
