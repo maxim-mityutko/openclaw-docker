@@ -1,7 +1,18 @@
 # OpenClaw Docker
+
 ![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.7-green)
 
 ## Why
+
+- Running OpenClaw in a containerized environment has trade-offs, but it
+  provides stronger security boundaries and tighter control over agent's access;
+- Some skills require additional libraries that are not included in the
+  original OpenClaw container;
+- Secret management is handled through Vaultwarden, which simplifies Kubernetes
+  deployment and removes the need to create or update encrypted secrets every
+  time an agent needs access to a new service. See
+  [home-infra](https://github.com/maxim-mityutko/home-infra) for the
+  Kubernetes deployment this image is designed to support;
 
 ## Secrets Management
 
@@ -56,3 +67,10 @@ instead:
 
 Refer to the [RBW configuration docs](https://github.com/doy/rbw/blob/main/README.md#configuration)
 for the details about supported options.
+
+## Versioning
+
+This image does not use semantic versioning. Tags are based on the upstream
+OpenClaw image version, with one additional digit for revisions to this custom
+image. This keeps the base image version visible while still allowing local
+image changes to be released independently.
