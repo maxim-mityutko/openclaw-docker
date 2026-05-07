@@ -25,6 +25,8 @@ specific credentials OpenClaw needs. For better isolation, create a dedicated
 Vaultwarden account for OpenClaw and share only the items that are required by
 the bot.
 
+Vault interactions are handled by the [Bitwarden Skill](https://clawhub.ai/asleep123/bitwarden).
+
 ### RBW
 
 RBW is an unofficial Bitwarden command-line client. This image includes `rbw`
