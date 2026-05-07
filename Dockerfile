@@ -10,7 +10,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
         curl \
-        jq
+        jq \
+        pinentry-curses
 
 RUN echo "Installing 'RBW' - Bitwarden unofficial client..."
 RUN curl -fsSL \
