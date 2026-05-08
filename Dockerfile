@@ -81,9 +81,7 @@ RUN brew cleanup -s
 USER root
 ENV SUDO_FORCE_REMOVE=yes
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-    && apt-get purge -y --auto-remove \
-        build-essential \
-        sudo \
+    && apt-get purge -y --auto-remove sudo \
     && apt-get clean \
     && rm -rf \
         /tmp/* \
