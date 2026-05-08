@@ -79,6 +79,7 @@ USER linuxbrew
 RUN /home/linuxbrew/.linuxbrew/bin/brew cleanup -s
 
 USER root
+ENV SUDO_FORCE_REMOVE=yes
 RUN rm -f \
         /home/linuxbrew/.linuxbrew/bin/brew; \
     rm -rf \
