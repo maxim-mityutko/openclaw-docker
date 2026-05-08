@@ -58,19 +58,29 @@ RUN npm install -g @karakeep/cli; \
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing Summarize CLI and dependencies..."
-USER linuxbrew
-RUN brew install summarize; \
+USER root
+RUN npm i -g @steipete/summarize; \
     summarize --version
-RUN brew install ffmpeg yt-dlp; \
+RUN apt-get install -y --no-install-recommends ffmpeg yt-dlp; \
     ffmpeg -version; \
     yt-dlp --version
+
+# USER linuxbrew
+# RUN brew install summarize; \
+#     summarize --version
+# RUN brew install ffmpeg yt-dlp; \
+#     ffmpeg -version; \
+#     yt-dlp --version
 
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing GitHub CLI..."
-USER linuxbrew
-RUN brew install gh; \
+USER root
+RUN apt-get install -y --no-install-recommends gh; \
     gh --version
+# USER linuxbrew
+# RUN brew install gh; \
+#     gh --version
 
 # ---------------------------------------------------------------------------------------------------------------------
 
