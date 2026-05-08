@@ -14,9 +14,20 @@ RUN apt-get update \
         curl \
         jq 
 
+# ---------------------------------------------------------------------------------------------------------------------
+
 RUN echo "Installing HomeBrew, because why not..."
-RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN apt-get install -y --no-install-recommends \
+        build-essential \
+        sudo
+RUN useradd -m -s /bin/bash linuxbrew \
+    && echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER linuxbrew
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+    && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \
+    && brew --version
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+USER root
 
 # ---------------------------------------------------------------------------------------------------------------------
 
