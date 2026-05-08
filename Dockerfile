@@ -14,8 +14,11 @@ RUN apt-get update \
         curl \
         jq 
 
-RUN echo "Cheaky 'pinentry' replacement, make sure that BITWARDEN_MASTER_PASSWORD environment variable is set during execution..."
-RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
+RUN echo "Installing HomeBrew, because why not..."
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+    brew --version
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing 'RBW' - Bitwarden unofficial client..."
 RUN curl -fsSL \
@@ -26,17 +29,29 @@ RUN curl -fsSL \
     install -m 0755 /tmp/rbw-agent /usr/local/bin/rbw-agent; \
     rbw --version
 
+RUN echo "Cheaky 'pinentry' replacement, make sure that BITWARDEN_MASTER_PASSWORD environment variable is set during execution..."
+RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
+
+# ---------------------------------------------------------------------------------------------------------------------
+
 RUN echo "Installing Karakeep CLI..."
 RUN npm install -g @karakeep/cli; \
     karakeep --version
 
+# ---------------------------------------------------------------------------------------------------------------------
+
 RUN echo "Installing Summarize CLI and dependencies..."
-RUN npm install -g @steipete/summarize; \
+RUN brew install summarize; \
     summarize --version
-RUN apt-get install -y --no-install-recommends \
-        ffmpeg \
-        yt-dlp \
-        tesseract-ocr
+RUN brew install ffmpeg yt-dlp
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing GitHub CLI..."
+RUN brew install gh; \
+    gh --version
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
