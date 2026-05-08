@@ -75,8 +75,20 @@ RUN brew install gh; \
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Cleaning up..."
+USER linuxbrew
+RUN /home/linuxbrew/.linuxbrew/bin/brew cleanup -s
+
 USER root
-RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+RUN rm -f \
+        /home/linuxbrew/.linuxbrew/bin/brew; \
+    rm -rf \
+        /home/linuxbrew/.linuxbrew/Homebrew \
+        /home/linuxbrew/.cache/Homebrew \
+        /tmp/homebrew-*; \
+    sed -i '/^linuxbrew ALL=(ALL) NOPASSWD:ALL$/d' /etc/sudoers; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+        build-essential \
+        sudo \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf \
