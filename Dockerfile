@@ -26,6 +26,18 @@ RUN curl -fsSL \
     install -m 0755 /tmp/rbw-agent /usr/local/bin/rbw-agent; \
     rbw --version
 
+RUN echo "Installing Karakeep CLI..."
+RUN npm install -g @karakeep/cli; \
+    karakeep --version
+
+RUN echo "Installing Summarize CLI and dependencies..."
+RUN npm install -g @steipete/summarize; \
+    summarize --version
+RUN apt-get install -y --no-install-recommends \
+        ffmpeg \
+        yt-dlp \
+        tesseract-ocr
+
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
