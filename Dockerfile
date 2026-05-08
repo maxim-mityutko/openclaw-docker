@@ -61,7 +61,9 @@ RUN echo "Installing Summarize CLI and dependencies..."
 USER linuxbrew
 RUN brew install summarize; \
     summarize --version
-RUN brew install ffmpeg yt-dlp
+RUN brew install ffmpeg yt-dlp; \
+    ffmpeg --version; \
+    yt-dlp --version
 
 # ---------------------------------------------------------------------------------------------------------------------
 
