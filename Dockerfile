@@ -17,21 +17,21 @@ RUN apt-get update \
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-RUN echo "Installing HomeBrew, because why not..."
-USER root
-RUN apt-get install -y --no-install-recommends \
-        build-essential \
-        sudo
+# RUN echo "Installing HomeBrew, because why not..."
+# USER root
+# RUN apt-get install -y --no-install-recommends \
+#         build-essential \
+#         sudo
 
-ENV HOMEBREW_NO_ANALYTICS=1
-RUN useradd -m -s /bin/bash linuxbrew \
-    && echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# ENV HOMEBREW_NO_ANALYTICS=1
+# RUN useradd -m -s /bin/bash linuxbrew \
+#     && echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-USER linuxbrew
-RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-    && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \
-    && brew --version
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+# USER linuxbrew
+# RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+#     && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \
+#     && brew --version
+# ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -52,18 +52,16 @@ RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_mast
 
 RUN echo "Installing Karakeep CLI..."
 USER root
-RUN npm install -g @karakeep/cli; \
-    karakeep --version
+RUN npm install -g @karakeep/cli && karakeep --version
 
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing Summarize CLI and dependencies..."
 USER root
-RUN npm i -g @steipete/summarize; \
-    summarize --version
-RUN apt-get install -y --no-install-recommends ffmpeg yt-dlp; \
-    ffmpeg -version; \
-    yt-dlp --version
+RUN npm i -g @steipete/summarize; summarize --version
+RUN apt-get install -y --no-install-recommends ffmpeg && ffmpeg -version
+RUN apt-get install -y --no-install-recommends yt-dlp && yt-dlp --version
+
 
 # USER linuxbrew
 # RUN brew install summarize; \
@@ -75,9 +73,17 @@ RUN apt-get install -y --no-install-recommends ffmpeg yt-dlp; \
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing GitHub CLI..."
-USER root
-RUN apt-get install -y --no-install-recommends gh; \
-    gh --version
+RUN apt-get install -y --no-install-recommends curl ca-certificates \
+    && mkdir -p -m 755 /etc/apt/keyrings \
+    && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        -o /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        > /etc/apt/sources.list.d/github-cli.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends gh \
+    && gh --version
+
 # USER linuxbrew
 # RUN brew install gh; \
 #     gh --version
@@ -85,8 +91,8 @@ RUN apt-get install -y --no-install-recommends gh; \
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Cleaning up..."
-USER linuxbrew
-RUN brew cleanup -s
+# USER linuxbrew
+# RUN brew cleanup -s
 
 USER root
 ENV SUDO_FORCE_REMOVE=yes
