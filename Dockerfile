@@ -62,7 +62,7 @@ USER linuxbrew
 RUN brew install summarize; \
     summarize --version
 RUN brew install ffmpeg yt-dlp; \
-    ffmpeg --version; \
+    ffmpeg -version; \
     yt-dlp --version
 
 # ---------------------------------------------------------------------------------------------------------------------
