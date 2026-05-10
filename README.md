@@ -2,6 +2,22 @@
 
 ![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.7-green)
 
+## Tools
+
+| Tool | Installed as | Purpose |
+| --- | --- | --- |
+| `git` | APT package | Source control and repository operations. |
+| `curl` | APT package | Fetch files, APIs, install scripts, and release artifacts. |
+| `jq` | APT package | Parse and transform JSON from command-line workflows. |
+| `rbw` | Release binary | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
+| `rbw-agent` | Release binary | Background agent used by `rbw` to unlock and cache vault access. |
+| `rbw_master_password_from_env.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
+| `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
+| `summarize` | Global npm package | Summarization CLI used by skills and media workflows. |
+| `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
+| `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
+| `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
+
 ## Why
 
 - Running OpenClaw in a containerized environment has trade-offs, but it
