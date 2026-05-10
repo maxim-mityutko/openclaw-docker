@@ -6,6 +6,7 @@ ARG RBW_VERSION="1.15.0"
 COPY scripts/rbw_master_password_from_env.py /tmp/rbw_master_password_from_env.py
 
 USER root
+# ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing standard dependencies..."
 RUN apt-get update \
@@ -14,8 +15,7 @@ RUN apt-get update \
         curl \
         jq 
 
-RUN echo "Cheaky 'pinentry' replacement, make sure that BITWARDEN_MASTER_PASSWORD environment variable is set during execution..."
-RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
+# ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing 'RBW' - Bitwarden unofficial client..."
 RUN curl -fsSL \
@@ -26,9 +26,39 @@ RUN curl -fsSL \
     install -m 0755 /tmp/rbw-agent /usr/local/bin/rbw-agent; \
     rbw --version
 
+RUN echo "Cheaky 'pinentry' replacement, make sure that BITWARDEN_MASTER_PASSWORD environment variable is set during execution..."
+RUN install -m 0755 /tmp/rbw_master_password_from_env.py /usr/local/bin/rbw_master_password_from_env.py
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing Karakeep CLI..."
+RUN npm install -g @karakeep/cli && karakeep --version
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing Summarize CLI and dependencies..."
+RUN npm i -g @steipete/summarize && summarize --version
+RUN apt-get install -y --no-install-recommends ffmpeg && ffmpeg -version
+RUN apt-get install -y --no-install-recommends yt-dlp && yt-dlp --version
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing GitHub CLI..."
+RUN apt-get install -y --no-install-recommends curl ca-certificates \
+    && mkdir -p -m 755 /etc/apt/keyrings \
+    && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        -o /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        > /etc/apt/sources.list.d/github-cli.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends gh \
+    && gh --version
+
+# ---------------------------------------------------------------------------------------------------------------------
+
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-    && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf \
         /tmp/* \
@@ -36,4 +66,5 @@ RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
         /var/cache/apt/* \
         /var/tmp/*
 
+# ---------------------------------------------------------------------------------------------------------------------
 USER node
