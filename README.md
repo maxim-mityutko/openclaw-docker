@@ -1,6 +1,6 @@
 # OpenClaw Docker
 
-![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.7-green)
+![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.18-green)
 
 ## Tools
 
