@@ -72,4 +72,9 @@ USER node
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing @openclaw/discord..."
-RUN openclaw plugins install @openclaw/discord
+RUN npm install --prefix /tmp/openclaw-discord @openclaw/discord \
+    && rm -rf /app/extensions/extras/discord \
+    && mkdir -p /app/extensions/extras \
+    && cp -a /tmp/openclaw-discord/node_modules/@openclaw/discord /app/extensions/extras/discord \
+    && npm install --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund --prefix /app/extensions/extras/discord \
+    && rm -rf /tmp/openclaw-discord
