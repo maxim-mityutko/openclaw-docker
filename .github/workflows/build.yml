@@ -90,7 +90,6 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           build-args: |
             OPENCLAW_IMAGE_VERSION=${{ env.OPENCLAW_IMAGE_VERSION }}
-            OPENCLAW_EXTENSIONS=codex discord
 
       - name: Update README Badge
         if: ${{ success() && github.ref_type != 'tag' }}

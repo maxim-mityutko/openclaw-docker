@@ -57,6 +57,11 @@ RUN apt-get install -y --no-install-recommends curl ca-certificates \
 
 # ---------------------------------------------------------------------------------------------------------------------
 
+RUN echo "Installing @openclaw/discord..."
+RUN npm i -g @openclaw/discord
+
+# ---------------------------------------------------------------------------------------------------------------------
+
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get clean \
