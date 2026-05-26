@@ -57,13 +57,6 @@ RUN apt-get install -y --no-install-recommends curl ca-certificates \
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-RUN echo "Installing @openclaw/discord..."
-RUN npm install --prefix /app/extensions @openclaw/discord \
-    && rm -rf /app/extensions/discord \
-    && mv /app/extensions/node_modules/@openclaw/discord /app/extensions/discord
-
-# ---------------------------------------------------------------------------------------------------------------------
-
 RUN echo "Cleaning up..."
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get clean \
@@ -75,3 +68,12 @@ RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
 
 # ---------------------------------------------------------------------------------------------------------------------
 USER node
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing @openclaw/discord..."
+RUN npm install --prefix /tmp/openclaw-discord @openclaw/discord \
+    && rm -rf /app/extensions/discord \
+    && cp -a /tmp/openclaw-discord/node_modules/@openclaw/discord /app/extensions/discord \
+    && npm install --omit=dev --prefix /app/extensions/discord \
+    && rm -rf /tmp/openclaw-discord
