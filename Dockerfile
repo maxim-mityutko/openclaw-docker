@@ -58,7 +58,8 @@ RUN apt-get install -y --no-install-recommends curl ca-certificates \
 # ---------------------------------------------------------------------------------------------------------------------
 
 RUN echo "Installing @openclaw/discord..."
-RUN npm i -g @openclaw/discord
+RUN mkdir -p /app/extensions/discord \
+    && npm install --prefix /app/extensions/discord @openclaw/discord
 
 # ---------------------------------------------------------------------------------------------------------------------
 
