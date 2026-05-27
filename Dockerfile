@@ -2,6 +2,7 @@ ARG OPENCLAW_IMAGE_VERSION="latest"
 FROM ghcr.io/openclaw/openclaw:${OPENCLAW_IMAGE_VERSION}
 
 ARG RBW_VERSION="1.15.0"
+ARG KUBECTL_VERSION="stable"
 
 COPY scripts/rbw_master_password_from_env.py /tmp/rbw_master_password_from_env.py
 
@@ -54,6 +55,19 @@ RUN apt-get install -y --no-install-recommends curl ca-certificates \
     && apt-get update \
     && apt-get install -y --no-install-recommends gh \
     && gh --version
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing kubectl..."
+RUN set -eux; \
+    if [ "$KUBECTL_VERSION" = "stable" ]; then \
+      KUBECTL_VERSION="$(curl -fsSL https://dl.k8s.io/release/stable.txt)"; \
+    fi; \
+    curl -fsSL \
+      "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
+      -o /tmp/kubectl; \
+    install -m 0755 /tmp/kubectl /usr/local/bin/kubectl; \
+    kubectl version --client=true
 
 # ---------------------------------------------------------------------------------------------------------------------
 
