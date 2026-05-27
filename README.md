@@ -17,6 +17,7 @@
 | `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
 | `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
 | `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
+| `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |
 
 ## Custom Extensions
 
