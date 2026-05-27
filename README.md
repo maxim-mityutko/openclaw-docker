@@ -2,6 +2,27 @@
 
 ![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.26-green)
 
+Custom OpenClaw container image with extra command-line tools, Vaultwarden
+secret access through `rbw`, and bundled custom extensions.
+
+The badge shows the upstream `ghcr.io/openclaw/openclaw` base image version
+used for the most recent image build.
+
+## Image
+
+Published images are available from GitHub Container Registry:
+
+```sh
+docker pull ghcr.io/maxim-mityutko/openclaw-docker:v2026.5.26.0
+```
+
+To build locally, pass the OpenClaw base image version explicitly or omit the
+build argument to use `latest`:
+
+```sh
+docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:local .
+```
+
 ## Tools
 
 | Tool | Installed as | Purpose |
@@ -22,7 +43,7 @@
 ## Custom Extensions
 
 This image installs custom OpenClaw extensions under `/app/custom/extensions`.
-For example, the Discord extension is copied to
+The image currently bundles the `@openclaw/discord` plugin at
 `/app/custom/extensions/discord` during the image build.
 
 OpenClaw only loads custom plugin directories that are part of its plugin load
@@ -32,11 +53,9 @@ OpenClaw config used by the container:
 ```json
 {
   "plugins": {
-    ...
     "load": {
       "paths": ["/app/custom/extensions"]
     }
-    ...
   }
 }
 ```
@@ -47,9 +66,12 @@ and append `/app/custom/extensions` to the same array.
 ## Why
 
 - Running OpenClaw in a containerized environment has trade-offs, but it
-  provides stronger security boundaries and tighter control over agent's access;
+  provides stronger security boundaries and tighter control over the agent's
+  access;
 - Some skills require additional libraries that are not included in the
-  original OpenClaw container;
+  upstream OpenClaw container;
+- Custom OpenClaw plugins can be preinstalled once and shared by every runtime
+  environment that uses this image;
 - Secret management is handled through Vaultwarden, which simplifies Kubernetes
   deployment and removes the need to create or update encrypted secrets every
   time an agent needs access to a new service. See
@@ -118,3 +140,6 @@ This image does not use semantic versioning. Tags are based on the upstream
 OpenClaw image version, with one additional digit for revisions to this custom
 image. This keeps the base image version visible while still allowing local
 image changes to be released independently.
+
+For example, `v2026.5.26.0` is the first custom image revision built from the
+OpenClaw `2026.5.26` base image.
