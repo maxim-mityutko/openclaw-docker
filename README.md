@@ -18,6 +18,31 @@
 | `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
 | `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
 
+## Custom Extensions
+
+This image installs custom OpenClaw extensions under `/app/custom/extensions`.
+For example, the Discord extension is copied to
+`/app/custom/extensions/discord` during the image build.
+
+OpenClaw only loads custom plugin directories that are part of its plugin load
+configuration. Add `/app/custom/extensions` to `plugins.load.paths` in the
+OpenClaw config used by the container:
+
+```json
+{
+  "plugins": {
+    ...
+    "load": {
+      "paths": ["/app/custom/extensions"]
+    }
+    ...
+  }
+}
+```
+
+If the config already defines `plugins.load.paths`, keep the existing entries
+and append `/app/custom/extensions` to the same array.
+
 ## Why
 
 - Running OpenClaw in a containerized environment has trade-offs, but it
