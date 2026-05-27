@@ -67,4 +67,15 @@ RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
         /var/tmp/*
 
 # ---------------------------------------------------------------------------------------------------------------------
+
 USER node
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing @openclaw/discord..."
+RUN npm install --prefix /tmp/openclaw-discord @openclaw/discord \
+    && rm -rf /app/custom/extensions/discord \
+    && mkdir -p /app/custom/extensions \
+    && cp -a /tmp/openclaw-discord/node_modules/@openclaw/discord /app/custom/extensions/discord \
+    && npm install --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund --prefix /app/custom/extensions/discord \
+    && rm -rf /tmp/openclaw-discord
