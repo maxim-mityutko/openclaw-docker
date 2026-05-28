@@ -33,7 +33,7 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 | `rg` | APT package (`ripgrep`) | Fast recursive text and file search for code and logs. |
 | `rbw` | Release binary | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
 | `rbw-agent` | Release binary | Background agent used by `rbw` to unlock and cache vault access. |
-| `rbw_master_password_from_env.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
+| `pinentry.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
 | `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
 | `summarize` | Global npm package | Summarization CLI used by skills and media workflows. |
 | `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
@@ -101,14 +101,14 @@ without relying on a browser or desktop integration.
 `rbw-agent` normally asks `pinentry` to prompt for the master password. In this
 container, interactive pinentry prompts are awkward and often unavailable, so
 the pinentry command should be replaced with
-`/usr/local/bin/rbw_master_password_from_env.py`. The script emulates the small
+`/usr/local/bin/pinentry.py`. The script emulates the small
 pinentry protocol surface that `rbw-agent` needs and returns the master password
 from the `BITWARDEN_MASTER_PASSWORD` environment variable instead.
 
 ```sh
 rbw config set email john@doe.com
 rbw config set base_url https://vault.doe.com
-rbw config set pinentry /usr/local/bin/rbw_master_password_from_env.py
+rbw config set pinentry /usr/local/bin/pinentry.py
 rbw login
 rbw unlock
 ```
@@ -127,7 +127,7 @@ instead:
   "notifications_url": null,
   "lock_timeout": 3600,
   "sync_interval": 300,
-  "pinentry": "/usr/local/bin/rbw_master_password_from_env.py",
+  "pinentry": "/usr/local/bin/pinentry.py",
   "client_cert_path": null
 }
 ```
