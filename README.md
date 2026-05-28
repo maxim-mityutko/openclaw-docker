@@ -64,6 +64,28 @@ OpenClaw config used by the container:
 If the config already defines `plugins.load.paths`, keep the existing entries
 and append `/app/custom/extensions` to the same array.
 
+## Custom Skills
+
+This image bundles the repository `skills/` directory into `/app/custom/skills`
+during the image build. The bundled skills are not loaded automatically unless
+the OpenClaw config includes that directory in the skills load configuration.
+
+Add `/app/custom/skills` to `skills.load.extraDirs` in the OpenClaw config used
+by the container:
+
+```json
+{
+  "skills": {
+    "load": {
+      "extraDirs": ["/app/custom/skills"]
+    }
+  }
+}
+```
+
+If the config already defines `skills.load.extraDirs`, keep the existing entries
+and append `/app/custom/skills` to the same array.
+
 ## Why
 
 - Running OpenClaw in a containerized environment has trade-offs, but it
