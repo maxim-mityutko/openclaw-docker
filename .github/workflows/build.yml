@@ -95,7 +95,7 @@ jobs:
             OPENCLAW_IMAGE_VERSION=${{ env.OPENCLAW_IMAGE_VERSION }}
 
       - name: Update README Badge
-        if: ${{ success() && github.ref_type != 'tag' }}
+        if: ${{ success() && github.ref_type != 'tag' && env.OPENCLAW_IMAGE_VERSION != '' && env.OPENCLAW_IMAGE_VERSION != 'null' && env.OPENCLAW_IMAGE_VERSION != 'latest' }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
