@@ -1,6 +1,6 @@
 # OpenClaw Docker
 
-![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.26-green)
+![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.5.27-green)
 
 Custom OpenClaw container image with extra command-line tools, Vaultwarden
 secret access through `rbw`, and bundled custom extensions.
@@ -30,6 +30,7 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 | `git` | APT package | Source control and repository operations. |
 | `curl` | APT package | Fetch files, APIs, install scripts, and release artifacts. |
 | `jq` | APT package | Parse and transform JSON from command-line workflows. |
+| `rg` | APT package (`ripgrep`) | Fast recursive text and file search for code and logs. |
 | `rbw` | Release binary | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
 | `rbw-agent` | Release binary | Background agent used by `rbw` to unlock and cache vault access. |
 | `rbw_master_password_from_env.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
