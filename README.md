@@ -86,6 +86,13 @@ by the container:
 If the config already defines `skills.load.extraDirs`, keep the existing entries
 and append `/app/custom/skills` to the same array.
 
+The bundled skills are:
+
+| Skill | Description |
+| --- | --- |
+| [GitHub App Token](skills/github-app-token/SKILL.md) | Mint a short-lived GitHub App installation token for `gh`. |
+| [Discord Command Sync](skills/discord-command-sync/SKILL.md) | Copy Discord slash commands from one OpenClaw bot account to another. |
+
 ## Why
 
 - Running OpenClaw in a containerized environment has trade-offs, but it
