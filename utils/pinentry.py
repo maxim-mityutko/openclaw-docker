@@ -5,8 +5,8 @@ rbw-agent speaks the Assuan pinentry protocol to request the master password.
 This script answers the small command subset rbw needs and returns the value
 from BITWARDEN_MASTER_PASSWORD instead of prompting interactively.
 
-Usage: 
-    rbw config set pinentry /path/to/rbw_master_password_from_env.py
+Usage:
+    rbw config set pinentry /path/to/pinentry.py
 """
 
 import os
