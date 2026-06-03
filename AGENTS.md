@@ -21,7 +21,7 @@ Configurable versions via build args:
 | `OPENCLAW_IMAGE_VERSION` | `latest` | Upstream OpenClaw image tag |
 | `RBW_VERSION` | `1.15.0` | RBW release version |
 | `KUBECTL_VERSION` | `stable` | kubectl release or `stable` |
-| `HELM_VERSION` | `3.19.0` | Helm 3.x release (pin to 3.19.x or latest 3.x) |
+| `HELM_VERSION` | `3.19.2` | Helm 3.x release (pin to 3.19.x or latest 3.x) |
 
 ## Making Changes
 

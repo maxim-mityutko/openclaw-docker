@@ -31,7 +31,7 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 | `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
 | `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
 | `git` | APT package | Source control and repository operations. |
-| `helm` | Helm release binary (v3.19.0) | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
+| `helm` | Helm release binary (v3.19.2) | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
 | `jq` | APT package | Parse and transform JSON from command-line workflows. |
 | `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
 | `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |

@@ -3,7 +3,7 @@ FROM ghcr.io/openclaw/openclaw:${OPENCLAW_IMAGE_VERSION}
 
 ARG RBW_VERSION="1.15.0"
 ARG KUBECTL_VERSION="stable"
-ARG HELM_VERSION="3.19.0"
+ARG HELM_VERSION="3.19.2"
 
 COPY utils/pinentry.py /tmp/pinentry.py
 
