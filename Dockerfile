@@ -3,6 +3,7 @@ FROM ghcr.io/openclaw/openclaw:${OPENCLAW_IMAGE_VERSION}
 
 ARG RBW_VERSION="1.15.0"
 ARG KUBECTL_VERSION="stable"
+ARG HELM_VERSION="stable"
 
 COPY utils/pinentry.py /tmp/pinentry.py
 
@@ -76,6 +77,25 @@ RUN set -eux; \
       -o /tmp/kubectl; \
     install -m 0755 /tmp/kubectl /usr/local/bin/kubectl; \
     kubectl version --client=true
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing Helm..."
+RUN set -eux; \
+    if [ "$HELM_VERSION" = "stable" ]; then \
+      HELM_VERSION="$(curl -fsSL https://get.helm.sh/helm-latest-version)"; \
+    fi; \
+    arch="$(dpkg --print-architecture)"; \
+    case "$arch" in \
+      amd64|arm64) ;; \
+      *) echo "Unsupported architecture: $arch"; exit 1 ;; \
+    esac; \
+    curl -fsSL \
+      "https://get.helm.sh/helm-${HELM_VERSION}-linux-${arch}.tar.gz" \
+      -o /tmp/helm.tar.gz; \
+    tar -xzf /tmp/helm.tar.gz -C /tmp; \
+    install -m 0755 "/tmp/linux-${arch}/helm" /usr/local/bin/helm; \
+    helm version --short
 
 # ---------------------------------------------------------------------------------------------------------------------
 

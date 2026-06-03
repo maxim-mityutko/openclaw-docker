@@ -40,6 +40,7 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 | `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
 | `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
 | `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |
+| `helm` | Helm release binary | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
 
 ## Custom Extensions
 
