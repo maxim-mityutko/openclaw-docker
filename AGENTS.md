@@ -42,11 +42,3 @@ Never commit directly to `main`.
 1. Update the relevant `ARG` in `Dockerfile` (or use the existing build arg)
 2. Update the `Version` column in `README.md`
 3. Submit a PR with both changes
-
-### AGENTS.md synchronization
-
-If you update this `AGENTS.md`, apply the same changes to the `AGENTS.md` in:
-- `/home/node/.openclaw/workspace/clamps/AGENTS.md`
-- `/home/node/.openclaw/workspace/bender/AGENTS.md`
-
-The files must remain identical.
