@@ -27,20 +27,20 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 
 | Tool | Installed as | Purpose |
 | --- | --- | --- |
-| `git` | APT package | Source control and repository operations. |
 | `curl` | APT package | Fetch files, APIs, install scripts, and release artifacts. |
+| `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
+| `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
+| `git` | APT package | Source control and repository operations. |
+| `helm` | Helm release binary (v3.19.0) | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
 | `jq` | APT package | Parse and transform JSON from command-line workflows. |
-| `rg` | APT package (`ripgrep`) | Fast recursive text and file search for code and logs. |
+| `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
+| `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |
+| `pinentry.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
 | `rbw` | Release binary | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
 | `rbw-agent` | Release binary | Background agent used by `rbw` to unlock and cache vault access. |
-| `pinentry.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
-| `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
+| `rg` | APT package (`ripgrep`) | Fast recursive text and file search for code and logs. |
 | `summarize` | Global npm package | Summarization CLI used by skills and media workflows. |
-| `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
 | `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
-| `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
-| `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |
-| `helm` | Helm release binary | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
 
 ## Custom Extensions
 
