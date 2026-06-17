@@ -1,6 +1,6 @@
 # OpenClaw Docker
 
-![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.6.1-green)
+![Static Badge](https://img.shields.io/badge/OpenClaw%20Image-v2026.6.8-green)
 
 Custom OpenClaw container image with extra command-line tools, Vaultwarden
 secret access through `rbw`, and bundled custom extensions.
