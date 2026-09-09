@@ -25,22 +25,23 @@ docker build --build-arg OPENCLAW_IMAGE_VERSION=2026.5.26 -t openclaw-docker:loc
 
 ## Tools
 
-| Tool | Installed as | Purpose |
-| --- | --- | --- |
-| `curl` | APT package | Fetch files, APIs, install scripts, and release artifacts. |
-| `ffmpeg` | APT package | Audio and video processing dependency for media workflows. |
-| `gh` | GitHub APT repository package | GitHub CLI for issues, pull requests, releases, and repository automation. |
-| `git` | APT package | Source control and repository operations. |
-| `helm` | Helm release binary (v3.19.2) | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
-| `jq` | APT package | Parse and transform JSON from command-line workflows. |
-| `karakeep` | Global npm package | Karakeep CLI for interacting with Karakeep services. |
-| `kubectl` | Kubernetes release binary | Kubernetes CLI for inspecting and managing clusters from inside the container. |
-| `pinentry.py` | Local helper script | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
-| `rbw` | Release binary | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
-| `rbw-agent` | Release binary | Background agent used by `rbw` to unlock and cache vault access. |
-| `rg` | APT package (`ripgrep`) | Fast recursive text and file search for code and logs. |
-| `summarize` | Global npm package | Summarization CLI used by skills and media workflows. |
-| `yt-dlp` | APT package | Media download/extraction tool used with summarization workflows. |
+| Tool | Installed as | Version | Purpose |
+| --- | --- | --- | --- |
+| `curl` | APT package | Image package | Fetch files, APIs, install scripts, and release artifacts. |
+| `ffmpeg` | APT package | Image package | Audio and video processing dependency for media workflows. |
+| `gh` | GitHub APT repository package | Latest APT package | GitHub CLI for issues, pull requests, releases, and repository automation. |
+| `git` | APT package | Image package | Source control and repository operations. |
+| `helm` | Helm release binary | v3.19.2 | Kubernetes package manager for rendering, installing, and inspecting Helm charts. |
+| `jq` | APT package | Image package | Parse and transform JSON from command-line workflows. |
+| `karakeep` | Global npm package | Latest npm package | Karakeep CLI for interacting with Karakeep services. |
+| `kubectl` | Kubernetes release binary | stable | Kubernetes CLI for inspecting and managing clusters from inside the container. |
+| `pinentry.py` | Local helper script | Repository revision | Pinentry-compatible helper that reads `BITWARDEN_MASTER_PASSWORD`. |
+| `rbw` | Release binary | v1.15.0 | Unofficial Bitwarden CLI for retrieving secrets from Vaultwarden. |
+| `rbw-agent` | Release binary | v1.15.0 | Background agent used by `rbw` to unlock and cache vault access. |
+| `rg` | APT package (`ripgrep`) | Image package | Fast recursive text and file search for code and logs. |
+| `summarize` | Global npm package | Latest npm package | Summarization CLI used by skills and media workflows. |
+| `yq` | mikefarah/yq release binary | v4.53.6 | Process YAML for configuration and Kubernetes workflows. |
+| `yt-dlp` | APT package | Image package | Media download/extraction tool used with summarization workflows. |
 
 ## Custom Extensions
 

@@ -4,6 +4,7 @@ FROM ghcr.io/openclaw/openclaw:${OPENCLAW_IMAGE_VERSION}
 ARG RBW_VERSION="1.15.0"
 ARG KUBECTL_VERSION="stable"
 ARG HELM_VERSION="v3.19.2"
+ARG YQ_VERSION="v4.53.6"
 
 COPY utils/pinentry.py /tmp/pinentry.py
 
@@ -96,6 +97,21 @@ RUN set -eux; \
     tar -xzf /tmp/helm.tar.gz -C /tmp; \
     install -m 0755 "/tmp/linux-${arch}/helm" /usr/local/bin/helm; \
     helm version --short
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+RUN echo "Installing yq..."
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "$arch" in \
+      amd64|arm64) ;; \
+      *) echo "Unsupported architecture: $arch"; exit 1 ;; \
+    esac; \
+    curl -fsSL \
+      "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${arch}" \
+      -o /tmp/yq; \
+    install -m 0755 /tmp/yq /usr/local/bin/yq; \
+    yq --version
 
 # ---------------------------------------------------------------------------------------------------------------------
 
